@@ -93,7 +93,7 @@ void fitsReader::NormaliseIR(float& r, float& I)
     I/=scale;
    // TODO:Below are current patches with magic numbers not to change shaders
     r=exp(-I)*22;
-    r=std::clamp(r,27,200);
+    //r=std::clamp(r,27,200);
     I*=0.02;
 
 }
