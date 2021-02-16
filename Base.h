@@ -80,6 +80,7 @@ class VulkanExample
 public:
 //Particle data
     std::vector<SpaceObj> vertices;
+    std::vector<particle_sim> particle_data;
 
 
 
