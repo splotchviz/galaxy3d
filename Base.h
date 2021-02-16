@@ -1,7 +1,7 @@
 
 
-#ifndef __BaseApp_h
-#define __BaseApp_h
+//#ifndef __BaseApp_h
+//#define __BaseApp_h
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -216,4 +216,4 @@ private:
 
 
 
-#endif
+//#endif
