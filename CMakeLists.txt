@@ -107,7 +107,7 @@ add_library (cfitsio SHARED IMPORTED)
 if (APPLE)
 set_target_properties (cfitsio PROPERTIES IMPORTED_LOCATION ${install_dir}/lib/libcfitsio.dylib) 
 else ()
-set_target_properties (cfitsio PROPERTIES IMPORTED_LOCATION ${install_dir}/lib/libcfitsio.so) #.so - find does not work so not sure how to fix it
+set_target_properties (cfitsio PROPERTIES IMPORTED_LOCATION ${install_dir}/lib64/libcfitsio.so) #.so - find does not work so not sure how to fix it
 endif (APPLE)
 
 set_target_properties(cfitsio PROPERTIES IMPORTED_NO_SONAME ON)
