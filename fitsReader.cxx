@@ -236,7 +236,8 @@ void fitsReader::ReadHeader() {
     status = 0;
 
 
-   const char *fn= filename.c_str();
+    char *fn=new char[filename.length() + 1];;
+    strcpy(fn, filename.c_str());
 
     if ( fits_open_file(&fptr, fn, READONLY, &status) )
         printerror( status );
@@ -399,7 +400,7 @@ void fitsReader::ReadHeader() {
 
     initSlice=crval[2]-(cdelt[2]*(cpix[2]-1));
 
-std::cout<<crval[0]<< " "<<crval[1]<< " "<<crval[2]<< " "<<cpix[0]<< " "<<cpix[1]<< " "<<cpix[2]<< " "<< cdelt[0]<< " "<<cdelt[1]<< " "<<cdelt[2]<< std::endl;
+//std::cout<<crval[0]<< " "<<crval[1]<< " "<<crval[2]<< " "<<cpix[0]<< " "<<cpix[1]<< " "<<cpix[2]<< " "<< cdelt[0]<< " "<<cdelt[1]<< " "<<cdelt[2]<< std::endl;
     
 }
 
@@ -429,7 +430,8 @@ void fitsReader::CalculateRMS(std::vector<VALS>& vals) {
     
     
     float nullval, buffer[buffsize];
-    const char *fn=filename.c_str();
+    char *fn=new char[filename.length() + 1];;
+    strcpy(fn, filename.c_str());
     
     if ( fits_open_file(&fptr, fn, READONLY, &status) )
         printerror( status );
