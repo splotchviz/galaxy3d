@@ -6,8 +6,10 @@
 #include <sstream>
 #include <algorithm>
 #include <cctype>
-#include <string>
+#include <stdio.h>
+#include <string.h>
 #include <vector>
+#include "string_utils.h"
 
 /*
  *
@@ -91,7 +93,7 @@ void fitsReader::NormaliseIR(float& r, float& I)
     I/=scale;
    // TODO:Below are current patches with magic numbers not to change shaders
     r=exp(-I)*22;
-    r=clamp(r,27,200);
+    r=std::clamp(r,27,200);
     I*=0.02;
 
 }
@@ -234,8 +236,7 @@ void fitsReader::ReadHeader() {
     status = 0;
 
 
-    char *fn=new char[filename.length() + 1];;
-    strcpy(fn, filename.c_str());
+    char *fn= filename.c_str();
 
     if ( fits_open_file(&fptr, fn, READONLY, &status) )
         printerror( status );
@@ -254,7 +255,7 @@ void fitsReader::ReadHeader() {
             if ( fits_read_record(fptr, jj, card, &status) )
                 printerror( status );
 
-            if (!strncmp(card, "CTYPE", 5)) {
+            if (!std::strncmp(card, "CTYPE", 5)) {
 
                 char *first = strchr(card, '\'');
                 char *last = strrchr(card, '\'');
