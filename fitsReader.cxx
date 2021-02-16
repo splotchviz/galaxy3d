@@ -236,7 +236,7 @@ void fitsReader::ReadHeader() {
     status = 0;
 
 
-    char *fn= filename.c_str();
+   const char *fn= filename.c_str();
 
     if ( fits_open_file(&fptr, fn, READONLY, &status) )
         printerror( status );
@@ -255,7 +255,7 @@ void fitsReader::ReadHeader() {
             if ( fits_read_record(fptr, jj, card, &status) )
                 printerror( status );
 
-            if (!std::strncmp(card, "CTYPE", 5)) {
+            if (!strncmp(card, "CTYPE", 5)) {
 
                 char *first = strchr(card, '\'');
                 char *last = strrchr(card, '\'');
@@ -429,8 +429,7 @@ void fitsReader::CalculateRMS(std::vector<VALS>& vals) {
     
     
     float nullval, buffer[buffsize];
-    char *fn=new char[filename.length() + 1];
-    strcpy(fn, filename.c_str());
+    const char *fn=filename.c_str();
     
     if ( fits_open_file(&fptr, fn, READONLY, &status) )
         printerror( status );
