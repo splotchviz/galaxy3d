@@ -482,6 +482,7 @@
         {
             VkPhysicalDeviceProperties props;
             vkGetPhysicalDeviceProperties(device, &props);
+            defInfo.deviceType=props.deviceType; //save device type
 
             // Determine the type of the physical device
             if (props.deviceType == VkPhysicalDeviceType::VK_PHYSICAL_DEVICE_TYPE_DISCRETE_GPU)
@@ -503,6 +504,22 @@
                 printf("something else\n") ;
             }
 
+
+        }
+
+        //check extensions
+        uint32_t extensionCount = 0;
+        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, nullptr);
+        std::vector<VkExtensionProperties> extensions(extensionCount);
+        vkEnumerateInstanceExtensionProperties(nullptr, &extensionCount, extensions.data());
+         printf("Full list of available extensions:\n");
+
+        for (const auto& extension : extensions) {
+             printf("%s \n",extension.extensionName);
+            if (std::string(extension.extensionName).compare("VK_KHR_surface") != 0)
+                 defInfo.interactive=true;
+             if (extension.extensionName=="VK_KHR_ray_tracing")
+                 defInfo.ray_tracing=true;
 
         }
 

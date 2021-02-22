@@ -78,9 +78,17 @@ struct SpaceObj {
 class VulkanExample
 {
 public:
+    //Device and GPU data
+    struct DeviceInfo{
+        VkPhysicalDeviceType deviceType; //TODO: pay also attention to VK_PHYSICAL_DEVICE_TYPE_VIRTUAL_GPU and VK_PHYSICAL_DEVICE_TYPE_CPU
+        bool interactive;
+        bool ray_tracing;
+        DeviceInfo(){interactive=false; ray_tracing=false;};
+    };
 //Particle data
     std::vector<SpaceObj> vertices;
     std::vector<particle_sim> particle_data;
+
 
 
 
@@ -175,6 +183,8 @@ public:
 
 
 private:
+        //for device info and generation of additional information on running environment
+         DeviceInfo defInfo;
 
         //particles stuff
              int32_t m_width, m_height;
